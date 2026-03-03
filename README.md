@@ -41,3 +41,9 @@
   <img src="./photo_2026-03-03_18-40-34.jpg" width="380" />
   <img src="./photo_2026-03-03_18-40-37.jpg" width="380" style="margin-left:10px;" />
 </p>
+
+<p align="center">
+  <a href="https://www.youtube.com/watch?v=zagbXWmQGME">
+    <img src="https://img.youtube.com/vi/zagbXWmQGME/maxresdefault.jpg" width="600"/>
+  </a>
+</p>
