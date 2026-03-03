@@ -26,14 +26,18 @@
 </p>
 
 <p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=prezix&theme=tokyonight&fire=0891b2" alt="GitHub Streak" width="700" />
+  <img src="https://streak-stats.demolab.com/?user=prezix&theme=tokyonight&fire=0891b2&ring=0891b2&stroke=0891b2" alt="GitHub Streak" width="700" />
 </p>
 
 ---
 
 ### 📫 Связь со мной
 
-[![GitHub](https://img.shields.io/badge/GitHub-prezix-0891b2?style=for-the-badge&logo=github)](https://github.com/prezix)
+<p align="left">
+  <a href="https://github.com/prezix">
+    <img src="https://img.shields.io/badge/GitHub-prezix-0891b2?style=for-the-badge&logo=github" alt="GitHub" />
+  </a>
+</p>
 
 ---
 
