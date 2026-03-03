@@ -20,10 +20,6 @@
 
 ### 📊 Аналитика активности
 
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=prezix&show_icons=true&theme=tokyonight&title_color=0891b2&icon_color=0891b2" alt="GitHub Stats" width="400" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=prezix&layout=compact&theme=tokyonight&title_color=0891b2" alt="Top Langs" width="300" />
-</p>
 
 <p align="center">
   <img src="https://streak-stats.demolab.com/?user=prezix&theme=tokyonight&fire=0891b2&ring=0891b2&stroke=0891b2" alt="GitHub Streak" width="700" />
