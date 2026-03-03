@@ -38,12 +38,17 @@
 ---
 
 <p align="center">
-  <img src="./photo_2026-03-03_18-40-34.jpg" width="380" />
-  <img src="./photo_2026-03-03_18-40-37.jpg" width="380" style="margin-left:10px;" />
-</p>
+  <a href="https://www.youtube.com/watch?v=Pd1-FzEI4Oc">
+    <img src="./photo_2026-03-03_18-40-34.jpg" width="380" />
+  </a>
 
-<p align="center">
   <a href="https://www.youtube.com/watch?v=N9ZjkSrsZRA">
-    <img src="https://img.youtube.com/vi/N9ZjkSrsZRA/maxresdefault.jpg" width="600" />
+    <img src="./photo_2026-03-03_18-40-37.jpg" width="380" style="margin-left:10px;" />
+  </a>
+
+  <a href="https://www.youtube.com/watch?v=3KVuiRBk5RI">
+    <img src="./swag.jpg" width="380" style="margin-left:10px;" />
   </a>
 </p>
+
+
