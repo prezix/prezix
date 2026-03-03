@@ -38,5 +38,6 @@
 ---
 
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0891b2&height=100&section=footer" />
+  <img src="./photo_2026-03-03_18-40-34.jpg" width="380" />
+  <img src="./photo_2026-03-03_18-40-37.jpg" width="380" style="margin-left:10px;" />
 </p>
