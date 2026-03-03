@@ -1,12 +1,10 @@
 # Привет! Я prezix 👋
 
 <p align="left">
-  <img src="https://komarev.com/ghpvc/?username=prezix&label=Profile%20views&color=0891b2&style=flat" alt="prezix" />
+  <img src="https://komarev.com/ghpvc/?username=prezix&label=Profile%20views&color=0891b2&style=flat-square" alt="prezix" />
 </p>
 
-> **Middle разработчик.** 
-
----
+> **Middle разработчик.** ---
 
 ### 🚀 Технологический стек
 
@@ -23,23 +21,19 @@
 ### 📊 Аналитика активности
 
 <p align="center">
-  <img width="48%" src="https://github-readme-stats.vercel.app/api?username=prezix&show_icons=true&theme=tokyonight&hide_border=true&title_color=0891b2" />
-  <img width="48%" src="https://github-readme-stats.vercel.app/api/top-langs/?username=prezix&layout=compact&theme=tokyonight&hide_border=true&title_color=0891b2" />
+  <img src="https://github-readme-stats.vercel.app/api?username=prezix&show_icons=true&theme=tokyonight&title_color=0891b2&icon_color=0891b2" alt="GitHub Stats" width="400" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=prezix&layout=compact&theme=tokyonight&title_color=0891b2" alt="Top Langs" width="300" />
 </p>
 
 <p align="center">
-  <img width="100%" src="https://github-readme-streak-stats.herokuapp.com/?user=prezix&theme=tokyonight&hide_border=true&ring=0891b2&fire=0891b2" />
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=prezix&theme=tokyonight&fire=0891b2" alt="GitHub Streak" width="700" />
 </p>
 
 ---
 
-### 📫 Как меня найти?
+### 📫 Связь со мной
 
-<p align="left">
-  <a href="https://github.com/prezix" target="_blank">
-    <img src="https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-</p>
+[![GitHub](https://img.shields.io/badge/GitHub-prezix-0891b2?style=for-the-badge&logo=github)](https://github.com/prezix)
 
 ---
 
