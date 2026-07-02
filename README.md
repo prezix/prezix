@@ -1,10 +1,9 @@
-# Привет! Я prezix 👋
+# prezix
 
 <p align="left">
   <img src="https://komarev.com/ghpvc/?username=prezix&label=Profile%20views&color=0891b2&style=flat-square" alt="prezix" />
 </p>
 
-> **Junior разработчик.** ---
 
 ### 🚀 Технологический стек
 
