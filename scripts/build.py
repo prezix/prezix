@@ -118,7 +118,7 @@ def main():
     y += 4
 
     # --- языковая полоса
-    fade(f'<text x="{X + 16}" y="{y}" class="m" fill="{DIM}">languages</text>')
+    fade(f'<text x="{X + 16}" y="{y}" class="m" fill="{DIM}">languages <tspan opacity="0.6">(public repos)</tspan></text>')
     y += 12
     bar_x, bar_w, bar_h = X + 16, W - 2 * X - 32, 12
     clips.append(f'<clipPath id="bar"><rect x="{bar_x}" y="{y}" width="0" height="{bar_h}" rx="6">'
