@@ -59,6 +59,12 @@
 
 <br/>
 
+## `~/site`
+
+**[smelosti.net →](https://smelosti.net)**
+
+<br/>
+
 ## `~/watch`
 
 <p align="center">
