@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="820" height="200" viewBox="0 0 820 200" role="img" aria-label="prezix — a little bit coding here">
+<style>
+.big{font:800 84px ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:-2px}
+.sub{font:15px ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace;letter-spacing:1px}
+.tag{font:11px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:2px}
+</style>
+<defs>
+<linearGradient id="bglight" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#f8fafc"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+<linearGradient id="inklight" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b7285"/><stop offset="1" stop-color="#7c3aed"/></linearGradient>
+<linearGradient id="scanlight" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b7285" stop-opacity="0"/><stop offset="0.5" stop-color="#0b7285" stop-opacity="0.12"/><stop offset="1" stop-color="#0b7285" stop-opacity="0"/></linearGradient>
+<pattern id="gridlight" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M24 0H0V24" fill="none" stroke="#0b7285" stroke-opacity="0.07"/></pattern>
+<clipPath id="cardlight"><rect width="820" height="200" rx="14"/></clipPath>
+<clipPath id="typelight"><rect x="48" y="138" width="0" height="26"><animate attributeName="width" values="0;10;20;30;40;50;60;70;80;90;100;110;120;130;140;150;160;170;180;190;200;210;220;230;240" keyTimes="0.0000;0.1200;0.1367;0.1533;0.1700;0.1867;0.2033;0.2200;0.2367;0.2533;0.2700;0.2867;0.3033;0.3200;0.3367;0.3533;0.3700;0.3867;0.4033;0.4200;0.4367;0.4533;0.4700;0.4867;0.5033" calcMode="discrete" dur="6s" fill="freeze"/></rect></clipPath>
+</defs>
+<g clip-path="url(#cardlight)">
+<rect width="820" height="200" fill="url(#bglight)"/>
+<rect width="820" height="200" fill="url(#gridlight)"/>
+<rect y="-60" width="820" height="60" fill="url(#scanlight)"><animate attributeName="y" values="-60;200" dur="4.5s" repeatCount="indefinite"/></rect>
+<!-- «глитч»: смещённые копии имени -->
+<text x="46" y="118" class="big" fill="#0b7285" opacity="0.0">prezix<animate attributeName="opacity" values="0;0;0.55;0;0;0.4;0;0" keyTimes="0;0.70;0.71;0.73;0.90;0.91;0.93;1" dur="7s" repeatCount="indefinite"/><animate attributeName="x" values="46;46;41;46;46;52;46;46" keyTimes="0;0.70;0.71;0.73;0.90;0.91;0.93;1" dur="7s" repeatCount="indefinite"/></text>
+<text x="46" y="118" class="big" fill="#f472b6" opacity="0.0">prezix<animate attributeName="opacity" values="0;0;0.5;0;0;0.4;0;0" keyTimes="0;0.70;0.71;0.73;0.90;0.91;0.93;1" dur="7s" repeatCount="indefinite"/><animate attributeName="x" values="46;46;51;46;46;40;46;46" keyTimes="0;0.70;0.71;0.73;0.90;0.91;0.93;1" dur="7s" repeatCount="indefinite"/></text>
+<text x="46" y="118" class="big" fill="url(#inklight)">prezix</text>
+<g clip-path="url(#typelight)"><text x="48" y="157" class="sub" fill="#475569">a little bit coding here</text></g>
+<rect x="48" y="141" width="9" height="19" fill="#0b7285"><animate attributeName="opacity" values="1;1;0;0" keyTimes="0;0.5;0.5;1" dur="1.1s" repeatCount="indefinite"/><animate attributeName="x" values="48;58;68;78;88;98;108;118;128;138;148;158;168;178;188;198;208;218;228;238;248;258;268;278;288" keyTimes="0.0000;0.1200;0.1367;0.1533;0.1700;0.1867;0.2033;0.2200;0.2367;0.2533;0.2700;0.2867;0.3033;0.3200;0.3367;0.3533;0.3700;0.3867;0.4033;0.4200;0.4367;0.4533;0.4700;0.4867;0.5033" calcMode="discrete" dur="6s" fill="freeze"/></rect>
+<text x="48" y="36" class="tag" fill="#0b7285" fill-opacity="0.85">// PREZIX.EXE · SESSION OPEN</text>
+<g transform="translate(700,40)" fill="none" stroke="#0b7285" stroke-opacity="0.35" stroke-width="1.5">
+<path d="M0 30 L20 10 L40 30 L20 50Z"><animateTransform attributeName="transform" type="rotate" from="0 20 30" to="360 20 30" dur="18s" repeatCount="indefinite"/></path>
+<path d="M60 90 L90 90 M75 75 L75 105" stroke="#7c3aed" stroke-opacity="0.45"/>
+<circle cx="75" cy="30" r="3" fill="#0b7285" stroke="none"><animate attributeName="opacity" values="1;0.2;1" dur="2.4s" repeatCount="indefinite"/></circle>
+</g>
+</g>
+<rect x="0.75" y="0.75" width="818.5" height="198.5" rx="13.5" fill="none" stroke="#0b7285" stroke-opacity="0.35"/>
+</svg>

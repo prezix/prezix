@@ -1,12 +1,18 @@
 #!/usr/bin/env python3
-"""Генерирует assets/terminal.svg из ПУБЛИЧНЫХ данных GitHub (только stdlib).
+"""Генерирует assets/terminal-{dark,light}.svg из ПУБЛИЧНЫХ данных GitHub (только stdlib).
 
 Приватные репозитории не попадают никуда: используется публичный эндпоинт
 /users/{user}/repos, который их не отдаёт.
+
+Пишет оба файла только если оба запроса к API прошли успешно — при сбое
+(лимит запросов, сеть) старые файлы остаются как есть и скрипт завершается
+с ошибкой, чтобы это было видно в логе Action, но ничего не затирает.
 """
 import html
 import json
 import os
+import sys
+import urllib.error
 import urllib.request
 from collections import Counter
 from datetime import datetime, timezone
@@ -28,7 +34,14 @@ STACK = [
     ("PyTorch", "#ee4c2c"), ("Photoshop", "#31a8ff"),
 ]
 
-BG, BORDER, FG, DIM, ACCENT = "#0d1117", "#30363d", "#e6edf3", "#7d8590", "#22d3ee"
+# Палитры для тёмной и светлой темы GitHub (переключение через <picture>
+# + prefers-color-scheme в README.md — см. scripts/render_banner.py).
+PALETTES = {
+    "dark": dict(bg="#0d1117", panel="#161b22", border="#30363d",
+                 fg="#e6edf3", dim="#7d8590", accent="#22d3ee"),
+    "light": dict(bg="#ffffff", panel="#f6f8fa", border="#d0d7de",
+                  fg="#1f2328", dim="#59636e", accent="#0b7285"),
+}
 CHAR_W = 8.4  # ширина символа моноширинного шрифта при 14px
 
 
@@ -56,21 +69,9 @@ def typewriter(width, begin, dur, steps):
             f'calcMode="discrete" begin="{begin:.2f}s" dur="{dur:.2f}s" fill="freeze"/>')
 
 
-def main():
-    user = api(f"/users/{USER}")
-    repos = [r for r in api(f"/users/{USER}/repos?per_page=100&type=owner")
-             if not r["fork"] and r["name"] not in SKIP]
-    langs = Counter(r["language"] for r in repos if r["language"])
-    total = sum(langs.values()) or 1
-    top = langs.most_common(5)
-    other = total - sum(n for _, n in top)
-    if other > 0:
-        top.append(("other", other))
-
-    since = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
-    years = (datetime.now(timezone.utc) - since).days / 365.25
-    last = max((r["pushed_at"] for r in repos), default=user["created_at"])
-    last = datetime.fromisoformat(last.replace("Z", "+00:00")).strftime("%Y-%m-%d")
+def render(theme, user, repos, langs_top, total, years, last):
+    pal = PALETTES[theme]
+    BG, PANEL, BORDER, FG, DIM, ACCENT = (pal[k] for k in ("bg", "panel", "border", "fg", "dim", "accent"))
 
     W, LH, X = 820, 24, 28
     body = []      # элементы SVG
@@ -121,12 +122,12 @@ def main():
     fade(f'<text x="{X + 16}" y="{y}" class="m" fill="{DIM}">languages <tspan opacity="0.6">(public repos)</tspan></text>')
     y += 12
     bar_x, bar_w, bar_h = X + 16, W - 2 * X - 32, 12
-    clips.append(f'<clipPath id="bar"><rect x="{bar_x}" y="{y}" width="0" height="{bar_h}" rx="6">'
+    clips.append(f'<clipPath id="bar{theme}"><rect x="{bar_x}" y="{y}" width="0" height="{bar_h}" rx="6">'
                  f'<animate attributeName="width" from="0" to="{bar_w}" begin="{t:.2f}s" dur="0.9s" '
                  f'fill="freeze" calcMode="spline" keySplines="0.2 0.8 0.2 1" keyTimes="0;1"/></rect></clipPath>')
-    seg = [f'<g clip-path="url(#bar)">']
+    seg = [f'<g clip-path="url(#bar{theme})">']
     cx = bar_x
-    for name, n in top:
+    for name, n in langs_top:
         w = bar_w * n / total
         seg.append(f'<rect x="{cx:.1f}" y="{y}" width="{w + 0.5:.1f}" height="{bar_h}" '
                    f'fill="{LANG_COLORS.get(name, "#6e7681")}"/>')
@@ -137,7 +138,7 @@ def main():
     y += bar_h + 20
     lx = bar_x
     items = []
-    for name, n in top:
+    for name, n in langs_top:
         label = f"{name} {round(100 * n / total)}%"
         items.append(f'<circle cx="{lx + 4}" cy="{y - 4}" r="4" fill="{LANG_COLORS.get(name, "#6e7681")}"/>'
                      f'<text x="{lx + 14}" y="{y}" class="s" fill="{DIM}">{esc(label)}</text>')
@@ -168,29 +169,57 @@ def main():
                 f'keyTimes="0;0.01;0.5;0.51;1" dur="1.1s" begin="{t:.2f}s" repeatCount="indefinite"/></tspan></text>')
     H = y + 28
 
-    svg = f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{USER} terminal profile">
+    return f'''<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}" role="img" aria-label="{USER} terminal profile">
 <style>
 .m{{font:14px ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace;white-space:pre}}
 .s{{font:12.5px ui-monospace,SFMono-Regular,Menlo,Consolas,'DejaVu Sans Mono',monospace}}
 .t{{font:12px ui-monospace,SFMono-Regular,Menlo,Consolas,monospace}}
 </style>
 <defs>
-<linearGradient id="glow" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{ACCENT}" stop-opacity="0.35"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0.35"/></linearGradient>
+<linearGradient id="glow{theme}" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{ACCENT}" stop-opacity="0.35"/><stop offset="1" stop-color="#a78bfa" stop-opacity="0.35"/></linearGradient>
 {"".join(clips)}
 </defs>
-<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="12" fill="{BG}" stroke="url(#glow)" stroke-width="1.5"/>
+<rect x="0.5" y="0.5" width="{W - 1}" height="{H - 1}" rx="12" fill="{BG}" stroke="url(#glow{theme})" stroke-width="1.5"/>
 <path d="M0.5 36 H{W - 0.5}" stroke="{BORDER}"/>
-<path d="M12 0.5 H{W - 12} A11.5 11.5 0 0 1 {W - 0.5} 12 V36 H0.5 V12 A11.5 11.5 0 0 1 12 0.5Z" fill="#161b22"/>
+<path d="M12 0.5 H{W - 12} A11.5 11.5 0 0 1 {W - 0.5} 12 V36 H0.5 V12 A11.5 11.5 0 0 1 12 0.5Z" fill="{PANEL}"/>
 <circle cx="24" cy="18" r="6" fill="#ff5f56"/><circle cx="46" cy="18" r="6" fill="#ffbd2e"/><circle cx="68" cy="18" r="6" fill="#27c93f"/>
 <text x="{W / 2}" y="22" text-anchor="middle" class="t" fill="{DIM}">{esc(USER)}@github: ~</text>
 {"".join(body)}
 </svg>
 '''
-    os.makedirs("assets", exist_ok=True)
-    with open("assets/terminal.svg", "w", encoding="utf-8") as f:
-        f.write(svg)
 
-    print(f"ok: {len(repos)} public repos, {len(top)} langs, svg {W}x{H}")
+
+def main():
+    try:
+        user = api(f"/users/{USER}")
+        repos = [r for r in api(f"/users/{USER}/repos?per_page=100&type=owner")
+                 if not r["fork"] and r["name"] not in SKIP]
+    except (urllib.error.URLError, urllib.error.HTTPError, TimeoutError) as e:
+        print(f"GitHub API unavailable ({e}); leaving existing assets untouched.", file=sys.stderr)
+        sys.exit(1)
+
+    langs = Counter(r["language"] for r in repos if r["language"])
+    total = sum(langs.values()) or 1
+    top = langs.most_common(5)
+    other = total - sum(n for _, n in top)
+    if other > 0:
+        top.append(("other", other))
+
+    since = datetime.fromisoformat(user["created_at"].replace("Z", "+00:00"))
+    years = (datetime.now(timezone.utc) - since).days / 365.25
+    last = max((r["pushed_at"] for r in repos), default=user["created_at"])
+    last = datetime.fromisoformat(last.replace("Z", "+00:00")).strftime("%Y-%m-%d")
+
+    os.makedirs("assets", exist_ok=True)
+    sizes = []
+    for theme in ("dark", "light"):
+        svg = render(theme, user, repos, top, total, years, last)
+        path = f"assets/terminal-{theme}.svg"
+        with open(path, "w", encoding="utf-8") as f:
+            f.write(svg)
+        sizes.append(f"{theme}={len(svg.splitlines())}L")
+
+    print(f"ok: {len(repos)} public repos, {len(top)} langs, {', '.join(sizes)}")
 
 
 if __name__ == "__main__":

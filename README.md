@@ -1,10 +1,18 @@
 <div align="center">
 
-<img src="./assets/banner.svg" alt="prezix — a little bit coding here" width="820" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/banner-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/banner-light.svg">
+  <img src="./assets/banner-dark.svg" alt="prezix — a little bit coding here" width="820" />
+</picture>
 
 <br/>
 
-<img src="./assets/terminal.svg" alt="prezix terminal profile" width="820" />
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/terminal-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/terminal-light.svg">
+  <img src="./assets/terminal-dark.svg" alt="prezix terminal profile" width="820" />
+</picture>
 
 </div>
 
@@ -82,5 +90,5 @@
 <br/>
 
 <div align="center">
-<sub><code>assets/terminal.svg</code> пересобирается сам раз в сутки из публичных данных GitHub · <a href="./scripts/build.py">как это работает</a></sub>
+<sub>Карточка выше — тёмная и светлая версии, GitHub сам переключает их под вашу тему. <code>assets/terminal-*.svg</code> пересобирается раз в сутки из публичных данных GitHub · <a href="./scripts/build.py">как это работает</a></sub>
 </div>
